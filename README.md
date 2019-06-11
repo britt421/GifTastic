@@ -9,8 +9,5 @@ This site can be a fun way to learn everyone's name in a group.
 How users can get started with the project:
 A user would simply type a name into the search bar to create a button. Then the user clicks on the button to generate 10 GIFs that are related to the name that they added to the collection of buttons.
 
-Where users can get help with your project:
-
-
 Who maintains and contributes to the project:
 I am the only person who maintains and contributes to this project.
