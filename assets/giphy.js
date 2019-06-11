@@ -5,8 +5,8 @@ $(document).ready(function () {
     // Function for rendering the HTML to display the appropriate content
     function displayGifs() {
         var nameSake = $(this).attr("data-name");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=%22" + nameSake + "%22&api_key=38B0q6Q4JZ3mp3YqyHQMFz3PBAADF2NV&limit=10";
-        
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=names+" + nameSake + "%22&api_key=38B0q6Q4JZ3mp3YqyHQMFz3PBAADF2NV&limit=10";
+       
         // Creates AJAX call for the specific button being clicked
         $.ajax({
             url: queryURL,
