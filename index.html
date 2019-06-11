@@ -11,30 +11,48 @@
 
 </head>
 <body>
-   
-
-        
-        
-
-        <!-- GIFs populate to the left (8) and search bar static to the right (4)-->
-   
         <div class="container">
-                <div class="gifsdisplay col-md-12">
-                  <div id="gifs-appear-here" class="col-md-8 "></div>
-                  <div class="container" class="col-md-4 ">
-                    <form id="search-form"></form>
-                    <label for="search-input"> Add a Gif</label>
-                    <br>
-                    <input type="text" id="gif-input">
-                    <br>
-                    <input id="add-gif" type="submit" value="Add a Gif">
-                    <br>
-                    <div id="buttons-view" class="col-md-2 "></div>
-                   
-                  </div>
+                <div class="row">
+                    <div class="col-md-12 heading">
+                        <h2>Let's Play the Giphy-Name Game!</h2>
+                    </div>
+                    <div class="col-md-12">
+                        <!-- Search box and submit button -->
+                        <form id="search-box">
+                            <label for="search-input">Type a name to get started!</label><br />
+                            <input type="text" id="user-input">
+                            <input id="add-gif" type="submit" value="Add">
+                        </form>
+                    </div>
+                </div> 
+                <div class="row flex-column-reverse flex-sm-row">
+                    <div class="col-md-8 col-sm-12">
+                        <!-- Gifs will get dumped here -->
+                        <div id="gif-view"></div>
+                    </div>
+                    <div class="col-md-4 col-sm-12" id="top">
+                        <!-- Rendered buttons will get dumped here -->
+                        <div id="buttons-view"></div>
+                    </div>
                 </div>
+            </div>
+   
+    <!-- <div class="container">
+            <div class="gifsdisplay col-md-12">
+                <div class="container" class="col-md-4 ">
+                <form id="search-form"></form>
+                <label for="search-input"> Type a name to get started!</label>
+                <br>
+                <input type="text" id="gif-input">
+                <br>
+                <input id="add-gif" type="submit" value="Add a Gif">
+                <br>
+                <div id="buttons-view" class="col-md-2 "></div>
                 </div>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-                <script src="assets/giphy.js"></script>
+                <div id="gifs-appear-here" class="col-md-8 "></div>
+            </div>
+    </div> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="assets/giphy.js"></script>
 </body>
 </html>

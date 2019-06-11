@@ -1,119 +1,85 @@
+$(document).ready(function () {
+    // Initial array
+    var nameList = ["Brian", "Erik", "Baggio", "James"];
 
-//Initial array of searchnames
-var searchnames = ["Brian", "Erik", "Baggio", "James"];
-
-//Function for displaying GIF data
-function renderButtons (){
-//console.log("IN RB")
-//Deleting the GIF buttons prior to adding new GIF buttons
-$("#buttons-view").empty();
-
-//Looping through the array of searchsearchnames
-for (var i = 0; i < searchnames.length; i++) {
-//console.log("IN LOOP")
-//Dynamically generating buttons for each name in the array
-var a = $("<button>")
-
-//Adding a class
-a.addClass("gifname");
-//console.log(searchnames[i])
-//Adding a data-attribute with a value of the GIF at index i
-a.attr("data-name", searchnames[i]);
-
-//Providing the button's text with a value of the GIF at index i
-a.text(searchnames[i]);
-//console.log(a)
-//Addingthe button to the HTML
-$("#buttons-view").append(a);
-}
-}
-
-$("#add-gif").on("click", function(event) {
-    event.preventDefault();
-    //console.log("HI")
-    // This line grabs the input from the textbox
-    var gifname = $("#gif-input").val().trim();
-//console.log(gifname)
-    // Adding movie from the textbox to our array
-    searchnames.push(gifname);
-//console.log(searchnames)
-    // Calling renderButtons which handles the processing of our movie array
-    renderButtons();
-  });
-
-
-renderButtons();
-
-    // displayMovieInfo function re-renders the HTML to display the appropriate content
-    function displayGif() {
-
-        var gif = $(this).attr("data-name");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=%22" + gif + "%22&api_key=38B0q6Q4JZ3mp3YqyHQMFz3PBAADF2NV&limit=10";
-        // Creating an AJAX call for the specific movie button being clicked
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).then(function(response) {
-//console.log(response);
-var searchDiv = $("<div class='search'>");
-var results = response.data;
-      // var newRow = $("<div class='row'>");
-      for (var i = 0; i < results.length; i++) {
-       
-        var imgURL = results[i].images.fixed_height.url;
-        //console.log(imgURL)
-        //console.log(results[i].images.fixed_height_still.url)
-        var image = $("<img>").attr("src", imgURL);
-        ////console.log(image);
-        image.attr("data-state", "still");
-        image.attr("data-still", results[i].images.fixed_height.url);
-        image.attr("data-animate", results[i].images.fixed_height_still.url);
-        image.addClass("gif_img col md-5");
-        console.log(image)
-        searchDiv.append(image); // Appending the image  
-        $("#gifs-appear-here").prepend(searchDiv);
-      }   
-        // var newColumn = $("<div class='col-md-4'>");
-        // var newTag = $("<p>");
-        //   newTag.text("Rating: " +  results[i].rating);
-        //   newColumn.prepend(newTag);
-        //   newColumn.prepend(image);
-        //   newRow.append(newColumn);
+    // Function for rendering the HTML to display the appropriate content
+    function displayGifs() {
+        var nameSake = $(this).attr("data-name");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=%22" + nameSake + "%22&api_key=38B0q6Q4JZ3mp3YqyHQMFz3PBAADF2NV&limit=10";
         
-          // Creating a div to hold the movie
-        //   var movieDiv = $("<div class='movie'>");
-
-
-        //   // Retrieving the URL for the image
-        //   var imgURL = response.Poster;
-
-        //   // Creating an element to hold the image
-        //   var image = $("<img>").attr("src", imgURL);
-
-        //   // Appending the image
-        //   movieDiv.append(image);
-
-        //   // Putting the entire movie above the previous movies
-        //   $("#movies-view").prepend(movieDiv);
+        // Creates AJAX call for the specific button being clicked
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            // Looping through each set of data
+            for (var i = 0; i < response.data.length; i++) {
+                // Creates new variables for newly rendered gifs and ratings
+                var gifDiv = $("<div>");
+                var newImage = $("<img>");
+                // Assigns new attribute to the data-state, so the image can animate when clicked
+                newImage.attr("data-state", "animate");
+                newImage.attr("data-animate", response.data[i].images.fixed_height.url)
+                // Assigns new attirbute to the data-state, so the image can return to an image when clicked again
+                newImage.attr("data-state", "still");
+                newImage.attr("data-still", response.data[i].images.fixed_height_still.url)
+                gifDiv.append(
+                    $("<p>").text("Rated: " + response.data[i].rating),
+                    newImage.attr("src", response.data[i].images.fixed_height_still.url)
+                )
+                $("#gif-view").prepend(gifDiv);
+            }
+            
+            
+        })
+    }
+   
+    displayGifs();
     
+    // Function for displaying buttons
+    function renderButtons() {
+
+        // Deleting the name buttons prior to adding new name buttons
+        $("#buttons-view").empty();
+
+        // Looping through the array of names and generating buttons for each
+        for (var i = 0; i < nameList.length; i++) {
+            var a = $("<button>");
+            // Adding a class
+            a.addClass("new");
+            // Adding a data-attribute 
+            a.attr("data-name", nameList[i]);
+            // Adding the button's text 
+            a.text(nameList[i]);
+            // Adding the button to the HTML
+            $("#buttons-view").append(a);
+        }
+    }
+
+    // Function for clicking the "submit" button
+    $("#add-gif").on("click", function (event) {
+        event.preventDefault();
+        var userText = $("#user-input").val().trim();
+        nameList.push(userText);
+        renderButtons();
     })
-      }
-      $(document).on("click", ".gifname", displayGif);
+    renderButtons();
 
-// //displayGIFinfo function re-renders the HTML to display the appropriate content
-// function displayGIFinfo() {
-//     var name = $(this).attr("data-name");
-//     var queryURL = "http://api.giphy.com/v1/gifs/search" + name + "api_key=38B0q6Q4JZ3mp3YqyHQMFz3PBAADF2NV&limit=10";
-// }
+    // Function for clicking on any button with the class of new
+    $(document).on("click", ".new", displayGifs);
+    renderButtons();
 
-// //Creating an AJAX call for the specific GIF button being clicked
-// $.ajax({
-//     url: queryURL,
-//     method: "GET"
-//  }).then(function(response){
-
-// //Creating a div to hold the GIFs
-// var  
-
-// })
-
+    // Function for clicking an image to make it both animate and stop again
+    $(document).on("click", "img", function(event) {
+        var state = $(this).attr("data-state");
+        if (state === "still") {
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+            // $(this).attr("src", $(this).attr("data-animate")); 
+        } else if (state === "animate") {
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+        }
+    })
+})
