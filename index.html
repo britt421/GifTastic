@@ -7,34 +7,34 @@
     <title>GifTastic</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/style.css">
-    <script src="assets/giphy.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   
 
 </head>
 <body>
-    <div class="container">
-        <h1>Name GIF Search</h1>
+   
 
-        <!-- rendered buttons will populate here -->
-        <div class="row">
-            <div class="col-md-12" id="buttons-view"></div>
-        </div>
+        
+        
 
         <!-- GIFs populate to the left (8) and search bar static to the right (4)-->
-    <div class="row">
-        <div class="col-md-8" id="gifs"></div>
-        <div class="col-md-4" id="searchBar">
-            <form id="gif-form">
-                <label for="gif-input"><em>Add your name!</em></label>
-                <input type="text" id="gif-input">
-            
-            <br>
-            <!-- Button triggers new gif to be added -->
-            <input id="add-gif" type="submit" value="Submit">
-            </form>
-        </div>
-    </div>
-
-    </div>
+   
+        <div class="container">
+                <div class="gifsdisplay col-md-12">
+                  <div id="gifs-appear-here" class="col-md-8 "></div>
+                  <div class="container" class="col-md-4 ">
+                    <form id="search-form"></form>
+                    <label for="search-input"> Add a Gif</label>
+                    <br>
+                    <input type="text" id="gif-input">
+                    <br>
+                    <input id="add-gif" type="submit" value="Add a Gif">
+                    <br>
+                    <div id="buttons-view" class="col-md-2 "></div>
+                   
+                  </div>
+                </div>
+                </div>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                <script src="assets/giphy.js"></script>
 </body>
 </html>
